@@ -31,7 +31,7 @@
     <packaging>pom</packaging>
 
     <name>Digipost XML</name>
-    <description>Toolset helping with some of the cumbersome APIs of the XML APIs in the JDK.</description>
+    <description>Toolset helping with some of the cumbersome XML APIs of the JDK.</description>
     <url>https://github.com/digipost/digipost-xml/</url>
 
     <modules>
