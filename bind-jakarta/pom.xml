@@ -32,4 +32,106 @@
         <maven.compiler.release>11</maven.compiler.release>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>digipost-xml-fundamentals</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <!--
+                This is a sort of hack to ensure the javax variant is built _before_ this
+                module in the Maven multimodule reactor, as this module uses the former
+                to generate its output. Maven does not have a "build time" scope (that I
+                know of at least?), so this is as close as we get. The dependency is "provided"
+                in the sense that it should not be included transitively in dependency resolution
+                from dependants of this library. It is also marked "optional" to remove it from
+                the dependency graph of dependants.
+            -->
+            <groupId>${project.groupId}</groupId>
+            <artifactId>digipost-xml-bind-javax</artifactId>
+            <version>${project.version}</version>
+            <optional>true</optional>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <configuration>
+                        <filesets>
+                            <fileset>
+                                <directory>src/main/java/no</directory>
+                            </fileset>
+                        </filesets>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>get-javax-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>digipost-xml-bind-javax</artifactId>
+                                    <version>${project.version}</version>
+                                    <classifier>sources</classifier>
+                                    <includes>**/*.java</includes>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>src/main/java</outputDirectory>
+                            <skipDuringIncrementalBuild>true</skipDuringIncrementalBuild>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.openrewrite.maven</groupId>
+                <artifactId>rewrite-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>transform-to-jakarta-sources</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>runNoFork</goal>
+                        </goals>
+                        <configuration>
+                            <runPerSubmodule>true</runPerSubmodule>
+                            <skipMavenParsing>true</skipMavenParsing>
+                            <configLocation>rewrite.yml</configLocation>
+                            <activeRecipes>
+                                <recipe>org.openrewrite.java.migrate.jakarta.JavaxXmlBindMigrationToJakartaXmlBind</recipe>
+                                <recipe>no.posten.ChangeJavaxPackageToJakarta</recipe>
+                            </activeRecipes>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.openrewrite.recipe</groupId>
+                        <artifactId>rewrite-migrate-java</artifactId>
+                        <version>2.23.0</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
