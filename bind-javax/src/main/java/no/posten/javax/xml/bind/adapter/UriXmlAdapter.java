@@ -15,20 +15,12 @@
  */
 package no.posten.javax.xml.bind.adapter;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
-
 import java.net.URI;
 
-public final class UriXmlAdapter extends XmlAdapter<String, URI> {
+public final class UriXmlAdapter extends NullPassthroughXmlAdapter<String, URI> {
 
-    @Override
-    public URI unmarshal(String uriString) {
-        return uriString != null ? URI.create(uriString) : null;
-    }
-
-    @Override
-    public String marshal(URI uri) {
-        return uri != null ? uri.toASCIIString() : null;
+    public UriXmlAdapter() {
+        super(URI::toASCIIString, URI::create);
     }
 
 }

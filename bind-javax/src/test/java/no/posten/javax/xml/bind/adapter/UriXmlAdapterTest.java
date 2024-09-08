@@ -6,20 +6,11 @@ import java.net.URI;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static uk.co.probablyfine.matchers.Java8Matchers.where;
 
 class UriXmlAdapterTest {
 
     private final UriXmlAdapter adapter = new UriXmlAdapter();
-
-    @Test
-    void handlesNull() {
-        assertAll(
-                () -> assertThat(adapter.marshal(null), nullValue()),
-                () -> assertThat(adapter.unmarshal(null), nullValue()));
-    }
 
     @Test
     void convertsToUri() {

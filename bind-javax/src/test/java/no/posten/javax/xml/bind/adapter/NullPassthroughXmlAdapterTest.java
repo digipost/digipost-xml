@@ -7,13 +7,13 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.fail;
 
-class JavaDateTimeApiXmlAdapterTest {
+class NullPassthroughXmlAdapterTest {
 
     @Test
     void handlesNull() {
-        JavaDateTimeApiXmlAdapter<?> adapter = new JavaDateTimeApiXmlAdapter<>(
-                __ -> fail("marshal adapter should not be used"),
-                (__, ___) -> fail("unmarshal adapter should not be used"));
+        NullPassthroughXmlAdapter<?, ?> adapter = new NullPassthroughXmlAdapter<>(
+                __ -> fail("marshal function should not be applied"),
+                __ -> fail("unmarshal function should not be applied"));
 
         assertAll(
                 () -> assertThat(adapter.marshal(null), nullValue()),
