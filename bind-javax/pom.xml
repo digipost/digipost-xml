@@ -59,5 +59,20 @@
             <artifactId>jaxb-resolver-com.sun.xml.bind</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>uk.co.probablyfine</groupId>
+            <artifactId>java-8-matchers</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>
