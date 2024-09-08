@@ -21,6 +21,8 @@ import static java.util.stream.Collectors.joining;
 
 public class MarshallingException extends RuntimeException {
 
+    private static final long serialVersionUID = 1L;
+
     public static MarshallingException failedUnmarshal(Class<?> target, Throwable cause) {
         return new MarshallingException("Failed unmarshalling XML to " + target.getName(), cause);
     }

@@ -48,7 +48,7 @@ public class JaxbMarshaller {
     }
 
     public JaxbMarshaller(MarshallingCustomization marshallingCustomization, Set<Class<?>> classesToBeBound) {
-        this(marshallingCustomization, classesToBeBound.toArray(new Class[classesToBeBound.size()]));
+        this(marshallingCustomization, classesToBeBound.toArray(new Class<?>[classesToBeBound.size()]));
     }
 
     public JaxbMarshaller(Class<?> ... classesToBeBound) {
