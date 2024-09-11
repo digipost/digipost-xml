@@ -3,6 +3,6 @@ name: no.posten.ChangeJavaxPackageToJakarta
 displayName: Rename package to jakarta
 recipeList:
   - org.openrewrite.java.ChangePackage:
-      oldPackageName: no.posten.javax
-      newPackageName: no.posten.jakarta
+      oldPackageName: no.digipost.javax
+      newPackageName: no.digipost.jakarta
       recursive: true
