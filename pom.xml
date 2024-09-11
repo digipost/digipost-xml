@@ -68,6 +68,11 @@
                 <artifactId>java-8-matchers</artifactId>
                 <version>1.9</version>
             </dependency>
+            <dependency>
+                <groupId>no.digipost</groupId>
+                <artifactId>digg</artifactId>
+                <version>0.35</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema version="1.0" targetNamespace="https://digipost.no/digipost-xml-bind"
+    xmlns="https://digipost.no/digipost-xml-bind"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified">
+
+    <xsd:complexType name="Alien">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="home" type="Planet" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="diplomatic-agreement" type="diplomatic-agreement" minOccurs="1" maxOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Planet">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" />
+            <xsd:element name="constellation-name" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="diplomatic-agreement">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="friend" />
+            <xsd:enumeration value="foe" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>

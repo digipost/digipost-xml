@@ -6,3 +6,11 @@ recipeList:
       oldPackageName: no.digipost.javax
       newPackageName: no.digipost.jakarta
       recursive: true
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: no.digipost.org.jvnet.jaxb2_commons.lang
+      newPackageName: no.digipost.org.jvnet.jaxb.lang
+      recursive: true
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.jvnet.jaxb2_commons
+      newPackageName: org.jvnet.jaxb
+      recursive: true
