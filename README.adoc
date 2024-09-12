@@ -1,0 +1,60 @@
+:toc: macro
+:toc-title: Read more:
+:toclevels: 3
+
+image::https://img.shields.io/badge/license-Apache%202-blue[Apache 2.0 License,link=https://www.apache.org/licenses/LICENSE-2.0]
+
+
+= Digipost XML
+
+Toolset helping with some of the cumbersome XML APIs of the JDK.
+
+Digipost XML consists of the following three libraries:
+
+- digipost-xml-*fundamentals*: offers some ergonomics on top of the standard XML APIs in the JDK. The baseline JDK requirement for this is Java 8, and there are not additional dependencies.
+- digipost-xml-*bind-jakarta*: JAXB facilities, inspired by Spring OXM, and in addition contains a library of some useful adapters and other JAXB-related stuff.
+- digipost-xml-*bind-javax*: This is identical to the above, but for the legacy `javax.xml.bind` namespace. It is, contrary to popular belief, possible to use these two JAXB variants side-by-side, should you need to, thanks to the almighty https://github.com/digipost/jaxb-resolver-com.sun.xml.bind[jaxb-resolver-com.sun.xml.bind].
+
+toc::[]
+
+== How to use
+
+Declare the following in your `dependencyManagement` section
+
+[,xml]
+----
+<dependencyManagement>
+    <dependency>
+        <groupId>no.digipost.xml</groupId>
+        <artifactId>digipost-xml-bom</artifactId>
+        <version>[latest-version]</version>
+        <type>pom</type>
+        <scope>import</scope>
+    </dependency>
+    ...
+</dependencyManagement>
+----
+
+And depend on the part(s) you need. E.g:
+
+[,xml]
+----
+<dependency>
+    <groupId>no.digipost.xml</groupId>
+    <artifactId>digipost-xml-fundamentals</artifactId>
+</dependency>
+<dependency>
+    <groupId>no.digipost.xml</groupId>
+    <artifactId>digipost-xml-bind-jakarta</artifactId>
+</dependency>
+----
+
+== Digipost XML Fundamentals
+
+TODO
+
+== Digipost XML Bind (JAXB)
+
+
+TODO
+
