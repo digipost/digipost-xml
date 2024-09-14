@@ -51,7 +51,22 @@ And depend on the part(s) you need. E.g:
 
 == Digipost XML Fundamentals
 
-TODO
+The XML APIs of the JDK is admittedly very low-level, and offer flexible access to the excellent XML facilities in Java. Usually you do not access these APIs directly, but they are used implicitly by libraries or frameworks. Should you need to interact directly with these APIs, this library may offer some ergonomics.
+
+=== Secure XML parsers
+
+https://www.oracle.com/java/technologies/jaxp-introduction.html[SAX parsers] can not be shared across threads, because they modify their internal state per parsing task. So you obtain a parser each from a `SAXParserFactory` each time you are going to parse som XML. Both initializing the factory and using it to create a parser are pestered with checked exceptions.
+
+`SaxParserProvider` is just the same factory pattern for obtaining a SAX parser, but without being forced to handle a smörgåsbord of checked exceptions. In addition, a ready-made secure SAX parser provider is offered through `SaxParserProvider.createSecuredProvider()`, which yields parsers configured to align with https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html#jaxb-unmarshaller[OWASP recommendations].
+
+
+=== XML validation with schemas
+
+Creating instances of `javax.xml.validation.Schema` is something you usually do with static resources you already own. Yet, just pointing to some XSDs you have on classpath to parse and create a `Schema` to use for validating XML you either create or consume, is ridiculously hard.
+
+`SchemaHelper.createW3cXmlSchema(Collection<String> schemaResourceNames)` takes a collection of classpath resource names (commonly XSD files you bundle with your application), and gives back an instance of `Schema`.
+
+
 
 == Digipost XML Bind (JAXB)
 
