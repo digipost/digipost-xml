@@ -87,7 +87,10 @@
                 <plugin>
                     <groupId>org.openrewrite.maven</groupId>
                     <artifactId>rewrite-maven-plugin</artifactId>
-                    <version>5.39.2</version>
+                    <version>5.41.0</version>
+                    <configuration>
+                        <recipeChangeLogLevel>INFO</recipeChangeLogLevel>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>com.mycila</groupId>
