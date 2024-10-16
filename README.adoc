@@ -49,6 +49,10 @@ And depend on the part(s) you need. E.g:
 </dependency>
 ----
 
+Substitute "jakarta" with "jaxb" to `digipost-xml-bind-jaxb` to use the legacy `javax.xml.bind` variant, or even include both if you need to support both variants in your application, as they can happily coexist.
+
+
+
 == Digipost XML Fundamentals
 
 The XML APIs of the JDK is admittedly very low-level, and offer flexible access to the excellent XML facilities in Java. Usually you do not access these APIs directly, but they are used implicitly by libraries or frameworks. Should you need to interact directly with these APIs, this library may offer some ergonomics.
@@ -70,6 +74,50 @@ Creating instances of `javax.xml.validation.Schema` is something you usually do 
 
 == Digipost XML Bind (JAXB)
 
+The XML Bind modules are offered as two variants: one for the current https://eclipse-ee4j.github.io/jaxb-ri/[Jakarta namespace], and one for the legacy `javax.xml.bind` namespace of JAXB. If you have the need to e.g support older JAXB-generated classes as well as the current JAXB version using `jakarta.xml.bind`, these two libraries should be able to happily coexist and operate within the same application.
 
-TODO
 
+=== JaxbMarshaller
+
+The main purpose of this library is to offer the `JaxbMarshaller` class which is inspired by `Jaxb2Marshaller` in Spring OXM. It offers thread-safe access to marshalling and unmarshalling facilities without having to worry about which component of the XML Bind (JAXB) is thread-safe, i.e. which instances that should be shared, and which should be created on each use. A `JaxbMarshaller` can be shared across threads, as one would expect.
+
+`JaxbMarshaller` offers an API for typical configuration use cases:
+- which classes which are bound to the https://jakarta.ee/specifications/platform/9/apidocs/jakarta/xml/bind/jaxbcontext[JAXB context]
+- schemas used for validation, and if used for either unmarshalling, marshalling, or both
+- other arbitrary custom configuration of https://jakarta.ee/specifications/platform/10/apidocs/jakarta/xml/bind/marshaller[Marshaller] and https://jakarta.ee/specifications/platform/10/apidocs/jakarta/xml/bind/unmarshaller[Unmarshaller] instances
+
+
+
+==== Examples
+
+Validate against schema bundled with your application on both marshalling and unmarshalling, and set a https://jakarta.ee/specifications/platform/10/apidocs/jakarta/xml/bind/marshaller#supportedProps[custom property for marshalling]:
+
+[,java]
+----
+var marshaller = new JaxbMarshaller(
+    MarshallingCustomization
+        .validateUsingSchemaResources(Set.of("/xsd/my-schema-on-classpath.xsd"))
+        .andThenOnMarshalling(marshaller -> marshaller.setProperty("jaxb.formatted.output", true)),
+    ABoundClass.class, AnotherBoundClass.class);
+----
+
+
+Alternatively, often it is advisable to _not_ do a formal schema validation on XML consumed from an API response, as long as the unmarshaller is able to parse and map to your classes, as this enables the service to introduce changes to the responses in a backwards compatible manner. Say to introduce new error codes in a schema-defined enumeration, which clients may or may not support spesific handling for, or introduce new elements which clients are strictly not required to consume. A client making requests to a server with a server-defined schema, should most of the times validate the marshalled XML before sending it to the server.
+
+
+[,java]
+----
+var marshaller = new JaxbMarshaller(
+    MarshallingCustomization
+        .onMarshalling(MarshallerCustomizer
+            .validateUsingSchemaResources(Set.of("/xsd/my-schema-on-classpath.xsd"))
+            .andThen(marshaller -> marshaller.setProperty("jaxb.formatted.output", true)))
+        .andThenOnUnmarshalling(unmarshaller -> {
+                // anything you want to do on the unmarshaller?
+                // You can also supply UnmarshallerCustomizer.NO_CUSTOMIZATION to be
+                // explicit, or just omit invocation of .andThenOnUnmarshalling(..)
+            }),
+    ABoundClass.class, AnotherBoundClass.class);
+----
+
+The `JaxbMarshaller` instance offers methods to either *marshal* (generate XML from Java objects) or *unmarshal* (parse XML and map contents to a Java object).
