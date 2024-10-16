@@ -7,7 +7,7 @@ image::https://img.shields.io/badge/license-Apache%202-blue[Apache 2.0 License,l
 
 = Digipost XML
 
-Toolset helping with some of the cumbersome XML APIs of the JDK.
+Toolset aimed at providing some added ease-of-use to the XML APIs of the JDK.
 
 Digipost XML consists of the following three libraries:
 
