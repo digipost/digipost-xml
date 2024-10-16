@@ -7,15 +7,16 @@ image:https://img.shields.io/badge/license-Apache%202-blue[Apache 2.0 License,li
 image:https://github.com/digipost/digipost-xml/workflows/Build%20and%20deploy/badge.svg[Build and deploy,link=https://github.com/digipost/digipost-xml/actions]
 
 
+
 == Digipost XML
 
 Toolset aimed at providing some added ease-of-use to the XML APIs of the JDK.
 
 Digipost XML consists of the following three libraries:
 
-- digipost-xml-*fundamentals*: offers some ergonomics on top of the standard XML APIs in the JDK. The baseline JDK requirement for this is Java 8, and there are not additional dependencies.
-- digipost-xml-*bind-jakarta*: JAXB facilities, inspired by Spring OXM, and in addition contains a library of some useful adapters and other JAXB-related stuff.
-- digipost-xml-*bind-javax*: This is identical to the above, but for the legacy `javax.xml.bind` namespace.
+- digipost-xml-*fundamentals* image:https://javadoc.io/badge2/no.digipost.xml/digipost-xml-fundamentals/javadoc.svg?logo=java&color=yellow[digipost-xml-fundamentals javadoc,link=https://javadoc.io/doc/no.digipost.xml/digipost-xml-fundamentals]: offers some ergonomics on top of the standard XML APIs in the JDK. The baseline JDK requirement for this is Java 8, and there are not additional dependencies.
+- digipost-xml-*bind-jakarta* image:https://javadoc.io/badge2/no.digipost.xml/digipost-xml-bind-jakarta/javadoc.svg?logo=java&color=yellow[digipost-xml-fundamentals javadoc,link=https://javadoc.io/doc/no.digipost.xml/digipost-xml-bind-jakarta]: JAXB facilities, inspired by Spring OXM, and in addition contains a library of some useful adapters and other JAXB-related stuff.
+- digipost-xml-*bind-javax* image:https://javadoc.io/badge2/no.digipost.xml/digipost-xml-bind-javax/javadoc.svg?logo=java&color=yellow[digipost-xml-fundamentals javadoc,link=https://javadoc.io/doc/no.digipost.xml/digipost-xml-bind-javax]: This is identical to the above, but for the legacy `javax.xml.bind` namespace.
 
 toc::[]
 
