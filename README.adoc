@@ -2,8 +2,9 @@
 :toc-title: Read more:
 :toclevels: 3
 
-image::https://img.shields.io/badge/license-Apache%202-blue[Apache 2.0 License,link=https://www.apache.org/licenses/LICENSE-2.0]
 
+image:https://img.shields.io/badge/license-Apache%202-blue[Apache 2.0 License,link=https://www.apache.org/licenses/LICENSE-2.0]
+image:https://github.com/digipost/digipost-xml/workflows/Build%20and%20deploy/badge.svg[Build and deploy,link=https://github.com/digipost/digipost-xml/actions]
 
 = Digipost XML
 
