@@ -6,7 +6,8 @@
 image:https://img.shields.io/badge/license-Apache%202-blue[Apache 2.0 License,link=https://www.apache.org/licenses/LICENSE-2.0]
 image:https://github.com/digipost/digipost-xml/workflows/Build%20and%20deploy/badge.svg[Build and deploy,link=https://github.com/digipost/digipost-xml/actions]
 
-= Digipost XML
+
+== Digipost XML
 
 Toolset aimed at providing some added ease-of-use to the XML APIs of the JDK.
 
@@ -19,7 +20,7 @@ Digipost XML consists of the following three libraries:
 toc::[]
 
 
-== Who is this library for?
+=== Who is this library for?
 
 This library is primarily intended for other libraries, where you may not wish to introduce a dependency to Spring. There is nothing wrong about Spring, and this library makes no effort to hide its heavy inspiration by Spring's own `Jaxb2Marshaller`, but to use that you would need to depend on `spring-oxm`, which further depends on both `spring-beans`  and `spring-core`, and as a library author you would want to keep your dependencies as clean and focused as possible to avoid introducing unnecessary artifacts into your library consumer's dependencies.
 
@@ -28,12 +29,12 @@ The library is of course also applicable for applications/servers if you use fra
 There is also the a bit specific case where you need to support JAXB marshalling using both the new Jakarta EE XML Bind API, and the legacy `javax.xml.bind` namespace. It is, contrary to popular belief, possible to use these two JAXB variants side-by-side, should you need to, thanks to the almighty https://github.com/digipost/jaxb-resolver-com.sun.xml.bind[jaxb-resolver-com.sun.xml.bind].
 
 
-== Towards version 1.0
+=== Towards version 1.0
 
 The short-term plan at this point is to release a Release Candidate version for use by a service offered at Posten Bring, and followingly do a final 1.0 release when we are able to "validate" its usability across different use-cases in different applications. You are most welcome to try it out, and if it seems to be applicable for your use-case, we would love to https://github.com/digipost/digipost-xml/issues[hear about it], and if you have some suggestions to potentially make it a better fit for your and/or other use cases!
 
 
-== How to use
+=== How to use
 
 Declare the following in your `dependencyManagement` section
 
@@ -69,18 +70,18 @@ Substitute "jakarta" with "javax" to `digipost-xml-bind-javax` to use the legacy
 
 
 
-== Digipost XML Fundamentals
+=== Digipost XML Fundamentals
 
 The XML APIs of the JDK is admittedly very low-level, and offer flexible access to the excellent XML facilities in Java. Usually you do not access these APIs directly, but they are used implicitly by libraries or frameworks. Should you need to interact directly with these APIs, this library may offer some ergonomics.
 
-=== Secure XML parsers
+==== Secure XML parsers
 
 https://www.oracle.com/java/technologies/jaxp-introduction.html[SAX parsers] can not be shared across threads, because they modify their internal state per parsing task. So you obtain a parser each from a `SAXParserFactory` each time you are going to parse som XML. Both initializing the factory and using it to create a parser are pestered with checked exceptions.
 
 `SaxParserProvider` is just the same factory pattern for obtaining a SAX parser, but without being forced to handle a smörgåsbord of checked exceptions. In addition, a ready-made secure SAX parser provider is offered through `SaxParserProvider.createSecuredProvider()`, which yields parsers configured to align with https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html#jaxb-unmarshaller[OWASP recommendations].
 
 
-=== XML validation with schemas
+==== XML validation with schemas
 
 Creating instances of `javax.xml.validation.Schema` is something you usually do with static resources you already own. Yet, just pointing to some XSDs you have on classpath to parse and create a `Schema` to use for validating XML you either create or consume, is ridiculously hard.
 
@@ -88,12 +89,12 @@ Creating instances of `javax.xml.validation.Schema` is something you usually do 
 
 
 
-== Digipost XML Bind (JAXB)
+=== Digipost XML Bind (JAXB)
 
 The XML Bind modules are offered as two variants: one for the current https://eclipse-ee4j.github.io/jaxb-ri/[Jakarta namespace], and one for the legacy `javax.xml.bind` namespace of JAXB. If you have the need to e.g support older JAXB-generated classes as well as the current JAXB version using `jakarta.xml.bind`, these two libraries should be able to happily coexist and operate within the same application.
 
 
-=== JaxbMarshaller
+==== JaxbMarshaller
 
 The main purpose of this library is to offer the `JaxbMarshaller` class which is inspired by `Jaxb2Marshaller` in Spring OXM. It offers thread-safe access to marshalling and unmarshalling facilities without having to worry about which component of the XML Bind (JAXB) is thread-safe, i.e. which instances that should be shared, and which should be created on each use. A `JaxbMarshaller` can be shared across threads, as one would expect.
 
