@@ -64,7 +64,7 @@ And depend on the part(s) you need. E.g:
 </dependency>
 ----
 
-Substitute "jakarta" with "jaxb" to `digipost-xml-bind-jaxb` to use the legacy `javax.xml.bind` variant, or even include both if you need to support both variants in your application, as they can happily coexist.
+Substitute "jakarta" with "javax" to `digipost-xml-bind-javax` to use the legacy `javax.xml.bind` variant, or even include both if you need to support both variants in your application, as they can happily coexist.
 
 
 
