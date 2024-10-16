@@ -20,7 +20,7 @@ toc::[]
 
 == Who is this library for?
 
-This library is primarily intended for other libraries, where you may not wish to introduce a dependency to Spring. There is nothing wrong about Spring, and this library makes no effort to hide its heavy inspiration by Spring's own `Jaxb2Marshaller`, but to use that you would need to depend on `spring-oxm`, which further depends on both `spring-beans`  and `spring-core`, and as a library author you would want to keep your dependencies as clean and focused as possible to avoid unnecessarily introducing unnecessary artifacts into your library consumer's dependencies.
+This library is primarily intended for other libraries, where you may not wish to introduce a dependency to Spring. There is nothing wrong about Spring, and this library makes no effort to hide its heavy inspiration by Spring's own `Jaxb2Marshaller`, but to use that you would need to depend on `spring-oxm`, which further depends on both `spring-beans`  and `spring-core`, and as a library author you would want to keep your dependencies as clean and focused as possible to avoid introducing unnecessary artifacts into your library consumer's dependencies.
 
 The library is of course also applicable for applications/servers if you use frameworks/libraries not already offering support for JAXB, or you need to interact somewhat directly with the XML APIs in the JDK.
 
