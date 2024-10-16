@@ -22,9 +22,12 @@ toc::[]
 
 This library is primarily intended for other libraries, where you may not wish to introduce a dependency to Spring. There is nothing wrong about Spring, and this library makes no effort to hide its heavy inspiration by Spring's own `Jaxb2Marshaller`, but to use that you would need to depend on `spring-oxm`, which further depends on both `spring-beans`  and `spring-core`, and as a library author you would want to keep your dependencies as clean and focused as possible to avoid unnecessarily introducing unnecessary artifacts into your library consumer's dependencies.
 
-The library is of course also applicable for applications if you use a stack not already offering support for JAXB, or you need to interact somewhat directly with the XML APIs in the JDK.
+The library is of course also applicable for applications/servers if you use frameworks/libraries not already offering support for JAXB, or you need to interact somewhat directly with the XML APIs in the JDK.
 
 There is also the a bit specific case where you need to support JAXB marshalling using both the new Jakarta EE XML Bind API, and the legacy `javax.xml.bind` namespace. It is, contrary to popular belief, possible to use these two JAXB variants side-by-side, should you need to, thanks to the almighty https://github.com/digipost/jaxb-resolver-com.sun.xml.bind[jaxb-resolver-com.sun.xml.bind].
+
+
+== Towards version 1.0
 
 The short-term plan at this point is to release a Release Candidate version for use by a service offered at Posten Bring, and followingly do a final 1.0 release when we are able to "validate" its usability across different use-cases in different applications. You are most welcome to try it out, and if it seems to be applicable for your use-case, we would love to https://github.com/digipost/digipost-xml/issues[hear about it], and if you have some suggestions to potentially make it a better fit for your and/or other use cases!
 
